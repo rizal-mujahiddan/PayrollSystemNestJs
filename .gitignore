@@ -1,0 +1,60 @@
+# compiled output
+backend-payroll/dist
+backend-payroll/node_modules
+backend-payroll/build
+
+# Logs
+backend-payroll/logs
+backend-payroll/*.log
+backend-payroll/npm-debug.log*
+backend-payroll/pnpm-debug.log*
+backend-payroll/yarn-debug.log*
+backend-payroll/yarn-error.log*
+backend-payroll/lerna-debug.log*
+
+# OS
+backend-payroll/.DS_Store
+
+# Tests
+backend-payroll/coverage
+backend-payroll/.nyc_output
+
+# IDEs and editors
+backend-payroll/.idea
+backend-payroll/.project
+backend-payroll/.classpath
+backend-payroll/.c9/
+backend-payroll/*.launch
+backend-payroll/.settings/
+backend-payroll/*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# dotenv environment variable files
+backend-payroll/.env
+backend-payroll/.env.development.local
+backend-payroll/.env.test.local
+backend-payroll/.env.production.local
+backend-payroll/.env.local
+
+# temp directory
+backend-payroll/.temp
+backend-payroll/.tmp
+
+# Runtime data
+backend-payroll/pids
+backend-payroll/*.pid
+backend-payroll/*.seed
+backend-payroll/*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+backend-payroll/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+.idx/*
+backend-payroll/database/databasepayroll.sqlite
+payroll_system_complete_design_ascii_diagrams.md
