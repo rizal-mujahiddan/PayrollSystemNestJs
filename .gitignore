@@ -55,6 +55,6 @@ backend-payroll/*.pid.lock
 # Diagnostic reports (https://nodejs.org/api/report.html)
 backend-payroll/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-.idx/*
+.idx/
 backend-payroll/database/databasepayroll.sqlite
 payroll_system_complete_design_ascii_diagrams.md
