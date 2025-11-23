@@ -8,6 +8,9 @@ import { ApprovalModule } from './approval/approval.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import AppDataSource from 'datasource';
 import { SeederModule } from './seeder/seeder.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { PayrollConfigModule } from './payroll_config/payroll_config.module';
+import { AuditLogsModule } from './audit_logs/audit_logs.module';
 
 @Module({
   imports: [
@@ -16,7 +19,10 @@ import { SeederModule } from './seeder/seeder.module';
     PayrunsModule,
     PayslipModule,
     ApprovalModule,
-    SeederModule
+    SeederModule,
+    TransactionsModule,
+    PayrollConfigModule,
+    AuditLogsModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,36 +1,29 @@
 import { ApprovalActionType } from "src/common/enums/approval-action-type.enum";
 import { ApprovalEntityType } from "src/common/enums/approval-entity-type.enum";
-import {Entity,PrimaryGeneratedColumn,Column} from "typeorm"
+import { Employee } from "src/employee/entities/employee.entity";
+import {Entity,PrimaryGeneratedColumn,Column,ManyToOne,JoinColumn,CreateDateColumn} from "typeorm"
 
+@Entity('approvals')
 export class Approval {
-    @PrimaryGeneratedColumn("uuid")
-    id:string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({
-        type:'enum',
-        enum:ApprovalEntityType
-    })
-    entity_type:ApprovalEntityType;
-    
-    @Column("uuid")
-    entity_id:string;
+  @Column()
+  entity_type: 'payrun' | 'payslip';
 
-    @Column("uuid")
-    approver_id:string;
-    
-    @Column()
-    role:string;
+  @Column()
+  entity_id: string;
 
-    @Column({
-        type:'enum',
-        enum:ApprovalActionType
-    })
-    action:ApprovalActionType;
-    
-    @Column('text')
-    comment:string;
-    
-    @Column("timestamp")
-    created_at:Date;
+  @ManyToOne(() => Employee)
+  @JoinColumn({ name: 'approver_id' })
+  approver: Employee;
 
+  @Column()
+  action: 'approve' | 'reject';
+
+  @Column({ nullable: true })
+  comment: string;
+
+  @CreateDateColumn()
+  created_at: Date;
 }

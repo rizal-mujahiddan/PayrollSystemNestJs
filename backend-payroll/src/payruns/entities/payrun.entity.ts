@@ -1,45 +1,40 @@
 import { PayrunStatus } from 'src/common/enums/payrun-status.enum';
+import { Payslip } from 'src/payslip/entities/payslip.entity';
+import { Transaction } from 'src/transactions/entities/transaction.entity';
 import {
-    Entity, PrimaryGeneratedColumn, Column, ManyToOne
+    Entity, PrimaryGeneratedColumn, Column, OneToMany,CreateDateColumn
   } from 'typeorm';
 
-@Entity()
-export class Payrun {
-    @PrimaryGeneratedColumn("uuid")
-    id:string;
-
+  @Entity('payruns')
+  export class Payrun {
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
+  
+    @Column({ type: 'date' })
+    period_start: Date;
+  
+    @Column({ type: 'date' })
+    period_end: Date;
+  
     @Column()
-    period_start:Date;
-
+    status: string;
+  
+    @Column('numeric')
+    total_gross: number;
+  
+    @Column('numeric')
+    total_net: number;
+  
     @Column()
-    period_end:Date;
-
-    @Column(
-        {
-            type:'varchar',
-            default:PayrunStatus.DRAFT
-        }
-    )
-    status:PayrunStatus;
-    
-    @Column("uuid")
-    created_by:string;
-
-    @Column({
-      default:0,
-      type:'decimal'
-    })
-    total_gross:number;
-
-    @Column({
-      default:0,
-      type:'decimal'
-    })
-    total_net:number;
-
-    @Column({ type: 'datetime' })
-    created_at:Date;
-
-    @Column({ type: 'datetime' , nullable:true})
-    finalized_at?:Date;
-}
+    created_by: string;
+  
+    @OneToMany(() => Payslip, p => p.payrun)
+    payslips: Payslip[];
+  
+    @OneToMany(() => Transaction, t => t.payrun)
+    transactions: Transaction[];
+  
+    @CreateDateColumn()
+    created_at: Date;
+  }
+  

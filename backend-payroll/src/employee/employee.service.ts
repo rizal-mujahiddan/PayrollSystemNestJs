@@ -14,7 +14,7 @@ export class EmployeeService {
     return this.employeeRepository.find();
   }
 
-  findOne(id: number): Promise<Employee | null> {
+  findOne(id: string): Promise<Employee | null> {
     return this.employeeRepository.findOneBy({ id });
   }
 }
