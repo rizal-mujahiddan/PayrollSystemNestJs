@@ -14,6 +14,7 @@ import { ApprovalActionType } from '../common/enums/approval-action-type.enum';
 import { ApprovalEntityType } from '../common/enums/approval-entity-type.enum';
 import { AuditLog } from '../audit_logs/entities/audit_log.entity';
 import { PayrollConfig } from '../payroll_config/entities/payroll_config.entity';
+import { TransactionStatus } from 'src/common/enums/transaction-status.enum';
 
 @Injectable()
 export class SeederService {
@@ -87,7 +88,7 @@ export class SeederService {
       const transaction = this.transactionRepository.create({
         amount: faker.number.int({ min: 100, max: 5000 }),
         bank_ref: simpleFaker.string.uuid(),
-        status: faker.helpers.arrayElement(['PENDING', 'PAID', 'FAILED']),
+        status: faker.helpers.arrayElement([ TransactionStatus.PENDING, TransactionStatus.PAID, TransactionStatus.FAILED]),
         attempts: faker.number.int({ min: 1, max: 3 }),
         employee: faker.helpers.arrayElement(employees),
       });

@@ -1,8 +1,10 @@
 import { EmployeeStatus } from 'src/common/enums/employee-status.enum';
 import { Payslip } from 'src/payslip/entities/payslip.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { User } from 'src/user/entities/user.entity';
 import {
-    Entity, PrimaryGeneratedColumn, Column, OneToMany
+    Entity, PrimaryGeneratedColumn, Column, OneToMany,
+    OneToOne
   } from 'typeorm';
 
   @Entity('employees')
@@ -35,11 +37,26 @@ import {
       }
     )
     status:EmployeeStatus;
-  
+
     @OneToMany(() => Payslip, p => p.employee)
     payslips: Payslip[];
   
     @OneToMany(() => Transaction, t => t.employee)
     transactions: Transaction[];
+
+    @Column()
+    email: string;
+    
+    @OneToOne(() => User, user => user.employee)
+    user: User;
+
+    @Column({ name: 'department' })
+    department: string;
+
+    @Column()
+    work_email:string;
+
+    @Column()
+    personal_email:string;
   }
   
