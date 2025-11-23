@@ -1,6 +1,7 @@
 import { Employee } from 'src/employee/entities/employee.entity';
 import { Payrun } from 'src/payruns/entities/payrun.entity';
 import { Payslip } from 'src/payslip/entities/payslip.entity';
+import { TransactionStatus } from '../../common/enums/transaction-status.enum';
 import {
     Entity,ManyToOne,PrimaryGeneratedColumn,JoinColumn,Column,CreateDateColumn
 } from 'typeorm'
@@ -28,8 +29,12 @@ export class Transaction {
   @Column({ nullable: true })
   bank_ref: string;
 
-  @Column()
-  status: string;
+  @Column({
+    type: 'varchar',
+    enum: TransactionStatus,
+    default: TransactionStatus.PENDING,
+  })
+  status: TransactionStatus;
 
   @Column({ default: 0 })
   attempts: number;

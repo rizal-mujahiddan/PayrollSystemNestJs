@@ -16,8 +16,13 @@ import {
     @Column({ type: 'date' })
     period_end: Date;
   
-    @Column()
-    status: string;
+    @Column(
+      {
+          type:'varchar',
+          default:PayrunStatus.DRAFT
+      }
+    )
+    status:PayrunStatus;
   
     @Column('numeric')
     total_gross: number;

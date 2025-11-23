@@ -28,8 +28,13 @@ import {
     @Column({ type: 'date' })
     join_date: Date;
   
-    @Column({ default: 'active' })
-    status: string;
+    @Column(
+      {
+          type:'varchar',
+          default:EmployeeStatus.ACTIVE
+      }
+    )
+    status:EmployeeStatus;
   
     @OneToMany(() => Payslip, p => p.employee)
     payslips: Payslip[];

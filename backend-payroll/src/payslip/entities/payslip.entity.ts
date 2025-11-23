@@ -33,9 +33,12 @@ import {
     @Column('numeric')
     net_salary: number;
   
-    @Column({ default: 'pending' })
-    status: string;
-  
+    @Column({
+      type:'varchar',
+      default:PayslipStatus.PENDING
+    })
+    status:PayslipStatus;
+
     @CreateDateColumn()
     created_at: Date;
   }

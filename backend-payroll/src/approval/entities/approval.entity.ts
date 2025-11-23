@@ -8,8 +8,11 @@ export class Approval {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  entity_type: 'payrun' | 'payslip';
+  @Column({
+    type:'varchar',
+    enum:ApprovalEntityType
+  })
+  entity_type:ApprovalEntityType;
 
   @Column()
   entity_id: string;
@@ -18,8 +21,11 @@ export class Approval {
   @JoinColumn({ name: 'approver_id' })
   approver: Employee;
 
-  @Column()
-  action: 'approve' | 'reject';
+  @Column({
+    type:'varchar',
+    enum:ApprovalActionType
+  })
+  action:ApprovalActionType;
 
   @Column({ nullable: true })
   comment: string;
