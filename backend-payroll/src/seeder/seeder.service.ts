@@ -15,6 +15,8 @@ import { ApprovalEntityType } from '../common/enums/approval-entity-type.enum';
 import { AuditLog } from '../audit_logs/entities/audit_log.entity';
 import { PayrollConfig } from '../payroll_config/entities/payroll_config.entity';
 import { TransactionStatus } from 'src/common/enums/transaction-status.enum';
+import { User } from 'src/user/entities/user.entity';
+import { EmployeeRole } from 'src/common/enums/employee-role.enum';
 
 @Injectable()
 export class SeederService {
@@ -35,6 +37,8 @@ export class SeederService {
     private readonly auditLogRepository: Repository<AuditLog>,
     @InjectRepository(PayrollConfig)
     private readonly payrollConfigRepository: Repository<PayrollConfig>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async seed() {
@@ -50,10 +54,25 @@ export class SeederService {
         base_salary: faker.number.int({ min: 30000, max: 100000 }),
         join_date: faker.date.past(),
         status: faker.helpers.arrayElement(Object.values(EmployeeStatus)),
+        email: faker.internet.email(),
+        department: faker.commerce.department(),
+        work_email: faker.internet.email(),
+        personal_email: faker.internet.email(),
       });
       employees.push(await this.employeeRepository.save(employee));
     }
     this.logger.log('Seeded employees');
+
+    for (const employee of employees) {
+      const user = this.userRepository.create({
+        email: employee.email,
+        password: 'password',
+        role: faker.helpers.arrayElement(Object.values(EmployeeRole)),
+        employee: employee,
+      });
+      await this.userRepository.save(user);
+    }
+    this.logger.log('Seeded users');
 
     const payruns: Payrun[] = [];
     for (let i = 0; i < 5; i++) {

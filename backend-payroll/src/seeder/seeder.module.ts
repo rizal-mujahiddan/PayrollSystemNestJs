@@ -9,6 +9,7 @@ import { Approval } from '../approval/entities/approval.entity';
 import { AuditLog } from '../audit_logs/entities/audit_log.entity';
 import { PayrollConfig } from '../payroll_config/entities/payroll_config.entity';
 import AppDataSource from '../../datasource';
+import { User } from '../user/entities/user.entity';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import AppDataSource from '../../datasource';
       Approval,
       AuditLog,
       PayrollConfig,
+      User,
     ]),
   ],
   providers: [SeederService],
